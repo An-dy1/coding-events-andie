@@ -17,6 +17,12 @@ import javax.validation.Valid;
 @RequestMapping("events")
 public class EventController {
 
+    // TODO 7: add a variable of type EventRepository
+
+    // TODO 8: replace EventData with methods on the EventRepository
+
+    // TODO 9: start up the app and test!
+
     @GetMapping
     public String displayAllEvents(Model model) {
         model.addAttribute("title", "All Events");
@@ -35,7 +41,7 @@ public class EventController {
     @PostMapping("create")
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
                                          Errors errors, Model model) {
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
             return "events/create";
         }

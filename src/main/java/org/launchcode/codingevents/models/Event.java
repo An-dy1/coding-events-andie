@@ -8,88 +8,93 @@ import java.util.Objects;
 /**
  * Created by Chris Bay
  */
+
+// TODO 2: designate this an entity for the JPA
 public class Event {
 
-    private int id;
-    private static int nextId = 1;
+	// TODO 3: designate ID as primary key
+	private int id;
+	private static int nextId = 1;
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
-    private String name;
+	// TODO 4: remove id-incrementing code
 
-    @Size(max = 500, message = "Description too long!")
-    private String description;
+	@NotBlank(message = "Name is required")
+	@Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
+	private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email. Try again.")
-    private String contactEmail;
+	@Size(max = 500, message = "Description too long!")
+	private String description;
 
-    private EventType type;
+	@NotBlank(message = "Email is required")
+	@Email(message = "Invalid email. Try again.")
+	private String contactEmail;
 
-    public Event(String name, String description, String contactEmail, EventType type) {
-        this();
-        this.name = name;
-        this.description = description;
-        this.contactEmail = contactEmail;
-        this.type = type;
-    }
+	private EventType type;
 
-    public Event() {
-        this.id = nextId;
-        nextId++;
-    }
+	public Event(String name, String description, String contactEmail, EventType type) {
+		this();
+		this.name = name;
+		this.description = description;
+		this.contactEmail = contactEmail;
+		this.type = type;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Event() {
+		this.id = nextId;
+		nextId++;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getContactEmail() {
-        return contactEmail;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
+	public String getContactEmail() {
+		return contactEmail;
+	}
 
-    public EventType getType() {
-        return type;
-    }
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
 
-    public void setType(EventType type) {
-        this.type = type;
-    }
+	public EventType getType() {
+		return type;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setType(EventType type) {
+		this.type = type;
+	}
 
-    @Override
-    public String toString() {
-        return name;
-    }
+	public int getId() {
+		return id;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return id == event.id;
-    }
+	@Override
+	public String toString() {
+		return name;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Event event = (Event) o;
+		return id == event.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }
