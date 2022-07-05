@@ -1,8 +1,9 @@
 package org.launchcode.codingevents.controllers;
 
-import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.data.EventDataRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,56 +18,53 @@ import javax.validation.Valid;
 @RequestMapping("events")
 public class EventController {
 
-    // TODO 7: add a variable of type EventRepository
+	@Autowired
+	EventDataRepository eventDataRepository;
 
-    // TODO 8: replace EventData with methods on the EventRepository
+	@GetMapping
+	public String displayAllEvents(Model model) {
+		model.addAttribute("title", "All Events");
+		model.addAttribute("events", eventDataRepository.findAll());
+		return "events/index";
+	}
 
-    // TODO 9: start up the app and test!
+	@GetMapping("create")
+	public String displayCreateEventForm(Model model) {
+		model.addAttribute("title", "Create Event");
+		model.addAttribute(new Event());
+		model.addAttribute("types", EventType.values());
+		return "events/create";
+	}
 
-    @GetMapping
-    public String displayAllEvents(Model model) {
-        model.addAttribute("title", "All Events");
-        model.addAttribute("events", EventData.getAll());
-        return "events/index";
-    }
+	@PostMapping("create")
+	public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
+	                                     Errors errors, Model model) {
+		if (errors.hasErrors()) {
+			model.addAttribute("title", "Create Event");
+			return "events/create";
+		}
 
-    @GetMapping("create")
-    public String displayCreateEventForm(Model model) {
-        model.addAttribute("title", "Create Event");
-        model.addAttribute(new Event());
-        model.addAttribute("types", EventType.values());
-        return "events/create";
-    }
+		eventDataRepository.save(newEvent);
+		return "redirect:";
+	}
 
-    @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
-                                         Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Create Event");
-            return "events/create";
-        }
+	@GetMapping("delete")
+	public String displayDeleteEventForm(Model model) {
+		model.addAttribute("title", "Delete Events");
+		model.addAttribute("events", eventDataRepository.findAll());
+		return "events/delete";
+	}
 
-        EventData.add(newEvent);
-        return "redirect:";
-    }
+	@PostMapping("delete")
+	public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
 
-    @GetMapping("delete")
-    public String displayDeleteEventForm(Model model) {
-        model.addAttribute("title", "Delete Events");
-        model.addAttribute("events", EventData.getAll());
-        return "events/delete";
-    }
+		if (eventIds != null) {
+			for (int id : eventIds) {
+				eventDataRepository.deleteById(id);
+			}
+		}
 
-    @PostMapping("delete")
-    public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
-
-        if (eventIds != null) {
-            for (int id : eventIds) {
-                EventData.remove(id);
-            }
-        }
-
-        return "redirect:";
-    }
+		return "redirect:";
+	}
 
 }

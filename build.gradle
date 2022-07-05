@@ -19,7 +19,6 @@ repositories {
     mavenCentral()
 }
 
-/* TODO 0: add jpa and mysql-connector dependencies */
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
