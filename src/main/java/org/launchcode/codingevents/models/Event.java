@@ -13,6 +13,10 @@ import javax.validation.constraints.Size;
 @Entity
 public class Event extends AbstractEntity {
 
+	@ManyToOne
+	@NotNull(message = "category is required")
+	private EventCategory eventCategory;
+
 	@NotBlank(message = "Name is required")
 	@Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
 	private String name;
@@ -25,14 +29,14 @@ public class Event extends AbstractEntity {
 	private String contactEmail;
 
 	@ManyToOne
-	@NotNull(message = "category is required")
-	private EventCategory eventCategory;
+	private Club hostingClub;
 
-	public Event(String name, String description, String contactEmail, EventCategory category) {
+	public Event(String name, String description, String contactEmail, EventCategory category, Club club) {
 		this.name = name;
 		this.description = description;
 		this.contactEmail = contactEmail;
 		this.eventCategory = category;
+		this.hostingClub = club;
 	}
 
 	public Event() {
@@ -68,6 +72,14 @@ public class Event extends AbstractEntity {
 
 	public void setEventCategory(EventCategory eventCategory) {
 		this.eventCategory = eventCategory;
+	}
+
+	public Club getHostingClub() {
+		return hostingClub;
+	}
+
+	public void setHostingClub(Club hostingClub) {
+		this.hostingClub = hostingClub;
 	}
 
 	@Override

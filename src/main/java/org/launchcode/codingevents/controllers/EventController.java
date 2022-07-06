@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.ClubRepository;
 import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
@@ -25,6 +26,9 @@ public class EventController {
 
 	@Autowired
 	private EventCategoryRepository eventCategoryRepository;
+
+	@Autowired
+	private ClubRepository clubRepository;
 
 	@GetMapping
 	public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model) {
@@ -54,6 +58,7 @@ public class EventController {
 		model.addAttribute("title", "Create Event");
 		model.addAttribute(new Event());
 		model.addAttribute("categories", eventCategoryRepository.findAll());
+		model.addAttribute("clubs", clubRepository.findAll());
 		return "events/create";
 	}
 
