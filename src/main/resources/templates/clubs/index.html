@@ -11,14 +11,24 @@
 <p th:text="${club?.description}"></p>
 
 <h2>Our events</h2>
-<ul>
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Category</th>
+	</tr>
+	</thead>
 	<th:block th:each="event : ${club?.getEvents()}">
-		<li>
-			<a th:text="${event.getEventCategory().getName()}"
-			   th:href="@{/events(categoryId=${event.getEventCategory().getId()})}"></a>
-		</li>
+		<tr>
+			<td th:text="${event.name}"></td>
+			<td>
+				<a th:text="${event.getEventCategory().name}"
+				   th:href="@{/events(categoryId=${event.getEventCategory().getId()})}">
+				</a>
+			</td>
+		</tr>
 	</th:block>
-</ul>
+</table>
 
 </body>
 </html>
