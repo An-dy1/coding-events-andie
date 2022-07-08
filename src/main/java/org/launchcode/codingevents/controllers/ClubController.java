@@ -25,7 +25,11 @@ public class ClubController {
 
 		if (result.isPresent()) {
 			model.addAttribute("club", result.get());
+			model.addAttribute("title", result.get().getName());
+		} else {
+			model.addAttribute("title", "Club not found");
 		}
+
 
 		return "clubs/index";
 	}
