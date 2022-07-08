@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<h2>Club description</h2>
+<p th:text="${club?.description}"></p>
+
+<h2>Our events</h2>
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Category</th>
+	</tr>
+	</thead>
+	<th:block th:each="event : ${club?.getEvents()}">
+		<tr>
+			<td th:text="${event.name}"></td>
+			<td>
+				<a th:text="${event.getEventCategory().name}"
+				   th:href="@{/events(categoryId=${event.getEventCategory().getId()})}">
+				</a>
+			</td>
+		</tr>
+	</th:block>
+</table>
+
+</body>
+</html>
