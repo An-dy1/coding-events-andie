@@ -24,8 +24,10 @@ public class SponsorController {
 		Optional<Sponsor> currentSponsor = sponsorRepository.findById(sponsorId);
 
 		if (currentSponsor.isPresent()) {
-			model.addAttribute("title", "Club Detail Page");
+			model.addAttribute("title", currentSponsor.get().getName());
 			model.addAttribute("sponsor", currentSponsor.get());
+		} else {
+			model.addAttribute("title", "Cannot find sponsor");
 		}
 
 

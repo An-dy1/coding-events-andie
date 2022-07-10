@@ -24,11 +24,14 @@
 		<td th:text="${event.contactEmail}"></td>
 		<td th:text="${event.eventCategory.name}"></td>
 		<td>
+			<!--			<a th:text="${event.hostingClub?.name}"-->
+			<!--			   th:href="@{/clubs/{hostingId}(hostingId = ${event.hostingClub?.id})}"></a>-->
 			<a th:text="${event.hostingClub?.name}"
 			   th:href="@{/clubs/{hostingId}(hostingId = ${event.hostingClub?.id})}"></a>
 		</td>
 		<td>
-			<a th:text="${event.sponsor?.name}" th:href="'/sponsor/' + ${event.sponsor?.id}"></a>
+			<a th:text="${event.sponsor?.name}"
+			   th:href="'/sponsor/' + ${event.sponsor?.id}"></a>
 		</td>
 	</tr>
 </table>
