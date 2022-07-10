@@ -3,6 +3,7 @@ package org.launchcode.codingevents.controllers;
 import org.launchcode.codingevents.data.ClubRepository;
 import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
+import org.launchcode.codingevents.data.SponsorRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,15 @@ public class EventController {
 	@Autowired
 	private ClubRepository clubRepository;
 
+	@Autowired
+	private SponsorRepository sponsorRepository;
+
 	@GetMapping
 	public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model) {
 		if (categoryId == null) {
 			model.addAttribute("title", "All Events");
 			model.addAttribute("events", eventRepository.findAll());
+			model.addAttribute("sponsors", sponsorRepository.findAll());
 		} else {
 			// get the event category by the passed in request param
 			// if nothing is returned then show all
@@ -59,6 +64,7 @@ public class EventController {
 		model.addAttribute(new Event());
 		model.addAttribute("categories", eventCategoryRepository.findAll());
 		model.addAttribute("clubs", clubRepository.findAll());
+		model.addAttribute("sponsors", sponsorRepository.findAll());
 		return "events/create";
 	}
 

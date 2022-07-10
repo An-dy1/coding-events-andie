@@ -47,6 +47,17 @@
 		</label>
 	</div>
 	<div class="form-group">
+		<label>Sponsor
+			<select th:field="${event.sponsor}">
+				<th:block th:each="sponsor : ${sponsors}">
+					<option th:value="${sponsor.id}" th:text="${sponsor.name}"></option>
+				</th:block>
+			
+			</select>
+			<p class="error" th:errors="${event.eventCategory}"></p>
+		</label>
+	</div>
+	<div class="form-group">
 		<input type="submit" value="Create" class="btn btn-success">
 	</div>
 </form>

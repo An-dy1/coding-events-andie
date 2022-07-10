@@ -14,6 +14,7 @@
 		<th>Contact Email</th>
 		<th>Category</th>
 		<th>Hosting Club</th>
+		<th>Sponsor</th>
 	</tr>
 	</thead>
 	<tr th:each="event : ${events}">
@@ -24,6 +25,9 @@
 		<td th:text="${event.eventCategory.name}"></td>
 		<td>
 			<a th:text="${event.hostingClub?.name}" th:href="'/clubs/' + ${event.hostingClub?.id}"></a>
+		</td>
+		<td>
+			<a th:text="${event.sponsor?.name}" th:href="'/sponsor/' + ${event.sponsor?.id}"></a>
 		</td>
 	</tr>
 </table>

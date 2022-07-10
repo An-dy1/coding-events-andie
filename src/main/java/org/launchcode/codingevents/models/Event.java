@@ -31,6 +31,9 @@ public class Event extends AbstractEntity {
 	@ManyToOne
 	private Club hostingClub;
 
+	@ManyToOne
+	private Sponsor sponsor;
+
 	public Event(String name, String description, String contactEmail, EventCategory category, Club club) {
 		this.name = name;
 		this.description = description;
@@ -80,6 +83,14 @@ public class Event extends AbstractEntity {
 
 	public void setHostingClub(Club hostingClub) {
 		this.hostingClub = hostingClub;
+	}
+
+	public Sponsor getSponsor() {
+		return sponsor;
+	}
+
+	public void setSponsor(Sponsor sponsor) {
+		this.sponsor = sponsor;
 	}
 
 	@Override
