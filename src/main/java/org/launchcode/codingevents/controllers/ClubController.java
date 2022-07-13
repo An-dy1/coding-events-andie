@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.ClubRepository;
 import org.launchcode.codingevents.models.Club;
+import org.launchcode.codingevents.models.ClubAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,5 +33,14 @@ public class ClubController {
 
 
 		return "clubs/index";
+	}
+
+	@GetMapping("/{clubId}/admin")
+	public String getAddClubAdminPage(Model model, @PathVariable Integer clubId) {
+
+		model.addAttribute("title", "Create admin for club: " + clubId);
+		model.addAttribute(new ClubAdmin());
+
+		return "clubs/createAdmin";
 	}
 }

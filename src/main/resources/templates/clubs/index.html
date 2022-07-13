@@ -8,6 +8,16 @@
 <h2>Club description</h2>
 <p th:text="${club?.description}"></p>
 
+<h3>Our admin</h3>
+<div th:if="${club.clubAdmin == null}">
+	<p>This club does not have an admin. Would you like to add one?</p>
+	<a th:href="@{'/clubs/' + ${club.id} + '/admin'}">Add club admin</a>
+</div>
+<div th:unless="${club.clubAdmin == null}">
+	<p th:text="${club.clubAdmin.name}"></p>
+</div>
+
+
 <h2>Our events</h2>
 <table class="table table-striped">
 	<thead>
