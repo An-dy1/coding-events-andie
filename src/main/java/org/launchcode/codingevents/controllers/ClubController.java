@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.hibernate.validator.constraints.ModCheck;
 import org.launchcode.codingevents.data.ClubAdminRepository;
 import org.launchcode.codingevents.data.ClubRepository;
 import org.launchcode.codingevents.models.Club;
@@ -45,52 +46,33 @@ public class ClubController {
 		Optional<Club> currentClub = clubRepository.findById(clubId);
 
 		model.addAttribute("title", "Create admin for club: " + clubId);
-		if (currentClub.isPresent()) {
-			model.addAttribute("club", clubRepository.findById(clubId).get());
-		}
 
-//		model.addAttribute(new ClubAdmin());
+		if (currentClub.isPresent()) {
+			model.addAttribute("club", currentClub.get());
+		}
 
 		return "clubs/createAdmin";
 	}
 
-	@PostMapping()
-	public String handleClubAdminFormSubmit(@Valid @ModelAttribute Club club, Errors errors, Model model) {
+	@PostMapping("/{clubId}/admin")
+	public String handleClubAdminFormSubmit(@Valid @ModelAttribute Club club, Errors errors, Model model, @PathVariable Integer clubId) {
 
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create club admin");
-			return "redirect:/events";
+			return "redirect:/clubs/" + clubId;
 		}
 
-//		Optional<Club> currentClub = clubRepository.findById(clubId);
-//		if (currentClub.isPresent()) {
-//			clubAdminRepository.save(clubAdmin);
-//			currentClub.get().setClubAdmin(clubAdmin);
-//		}
+		Optional<Club> existingClub = clubRepository.findById(clubId);
 
-		clubRepository.save(club);
-
-		// instead, take info from the form, save the parent and cascade to the child
+		if (existingClub.isPresent()) {
+			Club workingClub = existingClub.get();
+			workingClub.setClubAdmin(club.getClubAdmin());
+			clubRepository.save(workingClub);
+		}
 
 
-//		Optional<Club> currentClub = clubRepository.findById(club.getId());
-//
-//		if (currentClub.isPresent()) {
-//			System.out.println("current club's id is: " + currentClub.get().getId());
-//		}
-//
-//		if (currentClub.isPresent()) {
-//			currentClub.get().setClubAdmin(clubAdmin);
-////			clubRepository.save(currentClub.get());
-//		}
-//
-//		currentClub.get().setClubAdmin(clubAdmin);
-//		clubRepository.save(currentClub.get());
-
-//		club.setClubAdmin(clubAdmin);
-
-
-		return "redirect:/events";
+		return "redirect:/clubs/" + clubId;
 
 	}
+
 }
