@@ -62,6 +62,7 @@ public class Club extends AbstractEntity {
 	}
 
 	public void setClubAdmin(ClubAdmin clubAdmin) {
+		System.out.println("got to set club admin method");
 		this.clubAdmin = clubAdmin;
 	}
 

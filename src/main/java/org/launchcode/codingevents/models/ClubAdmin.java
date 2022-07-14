@@ -1,6 +1,8 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +17,9 @@ public class ClubAdmin extends AbstractEntity {
 
 	@NotNull(message = "must select membership level")
 	private String membershipLevel;
+
+//	@OneToOne()
+//	private Club associatedClub;
 
 //	public ClubAdmin(String name, String email, String membershipLevel) {
 //		this.name = name;
@@ -48,4 +53,12 @@ public class ClubAdmin extends AbstractEntity {
 	public void setMembershipLevel(String membershipLevel) {
 		this.membershipLevel = membershipLevel;
 	}
+
+//	public Club getAssociatedClub() {
+//		return associatedClub;
+//	}
+//
+//	public void setAssociatedClub(Club associatedClub) {
+//		this.associatedClub = associatedClub;
+//	}
 }

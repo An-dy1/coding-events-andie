@@ -5,28 +5,34 @@
 
 <header th:replace="fragments :: header"></header>
 
-<form method="post">
+<form th:action="@{'/clubs'}" method="post">
 	<div class="form-group">
 		<label>Admin's name
-			<input th:field="${clubAdmin.name}" class="form-control">
+			<input th:field="${club.clubAdmin.name}" class="form-control">
 		</label>
-		<span th:errors="${clubAdmin.name}" class="error"></span>
+		<span th:errors="${club.clubAdmin.name}" class="error"></span>
 	</div>
 	<div class="form-group">
 		<label>Admin's email
-			<input th:field="${clubAdmin.email}" class="form-control">
+			<input th:field="${club.clubAdmin.email}" class="form-control">
 		</label>
-		<span th:errors="${clubAdmin.email}" class="error"></span>
+		<span th:errors="${club.clubAdmin.email}" class="error"></span>
 	</div>
 	<div class="form-group">
 		<label>Membership level
-			<select th:field="${clubAdmin.membershipLevel}" class="form-control">
+			<select th:field="${club.clubAdmin.membershipLevel}" class="form-control">
 				<option value="silver">Silver</option>
 				<option value="gold">Gold</option>
 			</select>
 		</label>
-		<span th:errors="${clubAdmin.membershipLevel}" class="error"></span>
+		<span th:errors="${club.clubAdmin.membershipLevel}" class="error"></span>
 	</div>
+	<!--	<input type="hidden" th:field="${clubAdmin.associatedClub}" th:value="${club}"/>-->
+	<input type="hidden" th:field="${club.name}" th:value="${club.name}">
+	<input type="hidden" th:field="${club.location}" th:value="${club.location}">
+	<input type="hidden" th:field="${club.description}" th:value="${club.description}">
+	<input type="hidden" th:field="${club.events}" th:value="${club.events}">
+	
 	<input type="submit" value="Create" class="btn btn-primary">
 </form>
 
