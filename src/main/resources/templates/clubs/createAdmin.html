@@ -5,6 +5,7 @@
 
 <header th:replace="fragments :: header"></header>
 
+<!-- todo: current status 6: a form with fields for admin name, email and membership level, plus all the other event fields-->
 <form th:action="@{'/clubs/' + ${club.id} + '/admin'}" method="post">
 	<div class="form-group">
 		<label>Admin's name
@@ -28,9 +29,9 @@
 		<span th:errors="${club.clubAdmin.membershipLevel}" class="error"></span>
 	</div>
 	
+	<input type="hidden" th:field="${club.id}" th:value="${club.id}">
 	<input type="hidden" th:field="${club.name}" th:value="${club.name}">
 	<input type="hidden" th:field="${club.location}" th:value="${club.location}">
-	<input type="hidden" th:field="${club.id}" th:value="${club.id}">
 	
 	<th:block th:if="${club.description != null}">
 		<input type="hidden" th:field="${club.description}" th:value="${club.description}">

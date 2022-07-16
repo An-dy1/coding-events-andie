@@ -8,6 +8,7 @@
 <h2>Club description</h2>
 <p th:text="${club?.description}"></p>
 
+<!-- todo: current status 3: conditionally show a link to 'add an admin' if one is not present on the club object; note url string concatenation-->
 <h3>Our admin</h3>
 <div th:if="${club.clubAdmin == null}">
 	<p>This club does not have an admin. Would you like to add one?</p>

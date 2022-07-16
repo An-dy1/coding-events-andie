@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -18,14 +16,7 @@ public class ClubAdmin extends AbstractEntity {
 	@NotNull(message = "must select membership level")
 	private String membershipLevel;
 
-//	@OneToOne()
-//	private Club associatedClub;
-
-//	public ClubAdmin(String name, String email, String membershipLevel) {
-//		this.name = name;
-//		this.email = email;
-//		this.membershipLevel = membershipLevel;
-//	}
+	// todo current status 9: if we wanted our admin to know about its related club, how would we do that?
 
 	public ClubAdmin() {
 	}
@@ -54,11 +45,4 @@ public class ClubAdmin extends AbstractEntity {
 		this.membershipLevel = membershipLevel;
 	}
 
-//	public Club getAssociatedClub() {
-//		return associatedClub;
-//	}
-//
-//	public void setAssociatedClub(Club associatedClub) {
-//		this.associatedClub = associatedClub;
-//	}
 }

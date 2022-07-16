@@ -22,9 +22,8 @@
 		<td th:text="${event.eventDetails.description}"></td>
 		<td th:text="${event.eventDetails.contactEmail}"></td>
 		<td th:text="${event.eventCategory.name}"></td>
+		<!-- todo: current status 1: link on event listing table navigates to /clubs/{hostId} -->
 		<td>
-			<!--			<a th:text="${event.hostingClub?.name}"-->
-			<!--			   th:href="@{/clubs/{hostingId}(hostingId = ${event.hostingClub?.id})}"></a>-->
 			<a th:text="${event.hostingClub?.name}"
 			   th:href="@{/clubs/{hostingId}(hostingId = ${event.hostingClub?.id})}"></a>
 		</td>
