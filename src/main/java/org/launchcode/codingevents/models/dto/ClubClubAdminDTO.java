@@ -14,6 +14,7 @@ public class ClubClubAdminDTO {
 	@NotNull
 	private Club club;
 
+	@NotNull
 	private ClubAdmin admin;
 
 	public ClubClubAdminDTO() {

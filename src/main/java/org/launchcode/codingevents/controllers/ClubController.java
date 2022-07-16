@@ -5,6 +5,7 @@ import org.launchcode.codingevents.data.ClubAdminRepository;
 import org.launchcode.codingevents.data.ClubRepository;
 import org.launchcode.codingevents.models.Club;
 import org.launchcode.codingevents.models.ClubAdmin;
+import org.launchcode.codingevents.models.dto.ClubClubAdminDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,36 +41,38 @@ public class ClubController {
 		return "clubs/index";
 	}
 
+	// todo 2: instead of passing in a club object directly to our club admin form, we can set a club on the clubadminDto and then pass that into the form
+	// note: 404 code was written on other branch and this is not doing much validation atm
 	@GetMapping("/{clubId}/admin")
 	public String getAddClubAdminPage(Model model, @PathVariable Integer clubId) {
 
-		Optional<Club> currentClub = clubRepository.findById(clubId);
+		Optional<Club> result = clubRepository.findById(clubId);
+		Club club = result.get();
+
+		ClubClubAdminDTO clubAndAdmin = new ClubClubAdminDTO();
+		clubAndAdmin.setClub(club);
+
+		model.addAttribute("clubAndAdmin", clubAndAdmin);
 
 		model.addAttribute("title", "Create admin for club: " + clubId);
 
-		if (currentClub.isPresent()) {
-			model.addAttribute("club", currentClub.get());
-		}
 
 		return "clubs/createAdmin";
 	}
 
 	@PostMapping("/{clubId}/admin")
-	public String handleClubAdminFormSubmit(@Valid @ModelAttribute Club club, Errors errors, Model model, @PathVariable Integer clubId) {
+	public String handleClubAdminFormSubmit(@Valid @ModelAttribute ClubClubAdminDTO clubAndAdminDTO, Errors errors, Model model, @PathVariable Integer clubId) {
 
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create club admin");
-			return "redirect:/clubs/" + clubId;
+			return "redirect:/clubs/" + clubAndAdminDTO.getClub().getId();
 		}
 
-		Optional<Club> existingClub = clubRepository.findById(clubId);
+		Club club = clubAndAdminDTO.getClub();
+		ClubAdmin clubAdmin = clubAndAdminDTO.getAdmin();
 
-		if (existingClub.isPresent()) {
-			Club workingClub = existingClub.get();
-			workingClub.setClubAdmin(club.getClubAdmin());
-			clubRepository.save(workingClub);
-		}
-
+		club.setClubAdmin(clubAdmin);
+		clubRepository.save(club);
 
 		return "redirect:/clubs/" + clubId;
 
