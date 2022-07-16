@@ -78,4 +78,22 @@ public class ClubController {
 
 	}
 
+	@GetMapping("/{clubId}/admin/delete")
+	public String handleDeleteAdmin(@PathVariable Integer clubId) {
+
+		Optional<Club> result = clubRepository.findById(clubId);
+
+		if (result.isPresent()) {
+			Club club = result.get();
+			Integer adminId = club.getClubAdmin().getId();
+			club.setClubAdmin(null);
+
+			clubAdminRepository.deleteById(adminId);
+			clubRepository.save(club);
+		}
+
+
+		return "redirect:/clubs/" + clubId;
+	}
+
 }

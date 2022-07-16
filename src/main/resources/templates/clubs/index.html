@@ -15,6 +15,7 @@
 </div>
 <div th:unless="${club.clubAdmin == null}">
 	<p th:text="${club.clubAdmin.name}"></p>
+	<a th:href="@{'/clubs/' + ${club.id} + '/admin/delete'}">Delete admin</a>
 </div>
 
 
