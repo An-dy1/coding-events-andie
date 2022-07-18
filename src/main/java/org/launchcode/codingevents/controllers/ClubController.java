@@ -64,8 +64,10 @@ public class ClubController {
 	public String handleClubAdminFormSubmit(@Valid @ModelAttribute ClubClubAdminDTO clubAndAdminDTO, Errors errors, Model model, @PathVariable Integer clubId) {
 
 		if (errors.hasErrors()) {
-			model.addAttribute("title", "Create club admin");
-			return "redirect:/clubs/" + clubAndAdminDTO.getClub().getId();
+			model.addAttribute("title", "Try again");
+			model.addAttribute("errors", errors);
+			String redirectString = clubAndAdminDTO.getClub().getId() + "/admin";
+			return "redirect:/clubs/" + redirectString;
 		}
 
 		Club club = clubAndAdminDTO.getClub();

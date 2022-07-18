@@ -4,12 +4,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ClubAdmin extends AbstractEntity {
 
 	@NotNull(message = "name is required")
+	@Size(min = 3)
 	private String name;
 
 	@Email(message = "must enter valid email")
@@ -17,15 +20,6 @@ public class ClubAdmin extends AbstractEntity {
 
 	@NotNull(message = "must select membership level")
 	private String membershipLevel;
-
-//	@OneToOne()
-//	private Club associatedClub;
-
-//	public ClubAdmin(String name, String email, String membershipLevel) {
-//		this.name = name;
-//		this.email = email;
-//		this.membershipLevel = membershipLevel;
-//	}
 
 	public ClubAdmin() {
 	}
