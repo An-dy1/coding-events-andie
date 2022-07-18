@@ -34,7 +34,8 @@ public class ClubController {
 			model.addAttribute("club", result.get());
 			model.addAttribute("title", result.get().getName());
 		} else {
-			model.addAttribute("title", "Club not found");
+			model.addAttribute("title", "Resource not found");
+			return "shared/404";
 		}
 
 		return "clubs/index";
@@ -62,23 +63,22 @@ public class ClubController {
 
 	}
 
-	// todo: current status 7: if I didn't store the values of the Club fields, when I submit the form those will all be null
+	// todo: current status 7: if I didn't store the values of the Club fields, when I submit the form those will all be null and call setters on the null values
 	// note what happens if you hover the club variable
-
-	// todo: current status 8: given that our club is the parent entity and the club admin is a child, how do we create that one to one relationship? (what annotation, what arguments?)
+	// note validation not happening as I might expect
 	@PostMapping("/{clubId}/admin")
 	public String handleClubAdminFormSubmit(@Valid @ModelAttribute Club club, Errors errors, Model model, @PathVariable Integer clubId) {
 
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create club admin");
-			// improvement: add errors to the form and fields to capture them
-			return "redirect:/clubs/" + clubId;
+			model.addAttribute("errors", errors);
+			return "redirect:/clubs/" + clubId + "/admin";
 		}
 
 		Optional<Club> existingClub = clubRepository.findById(clubId);
 
 		// retrieve the current club from the database, and set its clubAdmin field equal to the clubAdmin object the form created
-
+		
 		if (existingClub.isPresent()) {
 			Club workingClub = existingClub.get();
 			workingClub.setClubAdmin(club.getClubAdmin());

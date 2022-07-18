@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,11 @@ public class Club extends AbstractEntity {
 	@OneToMany(mappedBy = "hostingClub")
 	private final List<Event> events = new ArrayList<>();
 
-	// todo: 0 - current relationship between clubs and clubAdmins
+	// todo 0 - current relationship between clubs and clubAdmins
 	// when do we want to use cascade argument?
 	// when do we want to use mappedBy argument?
 	@OneToOne(cascade = CascadeType.ALL)
+	@Valid
 	private ClubAdmin clubAdmin;
 
 	public Club(String name, String location, String description) {
