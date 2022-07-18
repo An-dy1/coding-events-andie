@@ -22,6 +22,9 @@ public class Club extends AbstractEntity {
 	@OneToMany(mappedBy = "hostingClub")
 	private final List<Event> events = new ArrayList<>();
 
+	// todo: 0 - current relationship between clubs and clubAdmins
+	// when do we want to use cascade argument?
+	// when do we want to use mappedBy argument?
 	@OneToOne(cascade = CascadeType.ALL)
 	private ClubAdmin clubAdmin;
 
