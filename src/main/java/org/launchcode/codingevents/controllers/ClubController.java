@@ -1,6 +1,5 @@
 package org.launchcode.codingevents.controllers;
 
-import org.hibernate.validator.constraints.ModCheck;
 import org.launchcode.codingevents.data.ClubAdminRepository;
 import org.launchcode.codingevents.data.ClubRepository;
 import org.launchcode.codingevents.models.Club;
@@ -10,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -61,13 +61,17 @@ public class ClubController {
 	}
 
 	@PostMapping("/{clubId}/admin")
-	public String handleClubAdminFormSubmit(@Valid @ModelAttribute ClubClubAdminDTO clubAndAdminDTO, Errors errors, Model model, @PathVariable Integer clubId) {
+	public String handleClubAdminFormSubmit(@Validated @ModelAttribute ClubClubAdminDTO clubAndAdminDTO, Errors errors, Model model, @PathVariable Integer clubId) {
 
 		if (errors.hasErrors()) {
-			model.addAttribute("title", "Try again");
+			model.addAttribute("title", "Create admin for club: " + clubId);
+
 			model.addAttribute("errors", errors);
-			String redirectString = clubAndAdminDTO.getClub().getId() + "/admin";
-			return "redirect:/clubs/" + redirectString;
+
+			model.addAttribute("clubAndAdmin", clubAndAdminDTO);
+
+			return "clubs/createAdmin";
+
 		}
 
 		Club club = clubAndAdminDTO.getClub();

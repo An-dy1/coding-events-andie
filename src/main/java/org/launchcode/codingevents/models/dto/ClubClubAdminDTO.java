@@ -4,6 +4,7 @@ import org.launchcode.codingevents.models.Club;
 import org.launchcode.codingevents.models.ClubAdmin;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 // todo 1: data transfer object
@@ -12,11 +13,11 @@ import javax.validation.constraints.NotNull;
 // but no entity annotation: we aren't persisting this, we're persisting values inside it
 public class ClubClubAdminDTO {
 
-	@NotNull
-	@Valid
+	@NotNull(message = "club cannot be blank")
+	@Valid()
 	private Club club;
 
-	@NotNull
+	@NotNull(message = "admin cannot be blank")
 	@Valid
 	private ClubAdmin admin;
 
