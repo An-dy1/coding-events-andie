@@ -31,8 +31,9 @@ public class ClubController {
 		Optional<Club> result = clubRepository.findById(clubId);
 
 		if (result.isPresent()) {
-			model.addAttribute("club", result.get());
-			model.addAttribute("title", result.get().getName());
+			Club club = result.get();
+			model.addAttribute("club", club);
+			model.addAttribute("title", club.getName());
 		} else {
 			model.addAttribute("title", "Resource not found");
 			return "shared/404";
@@ -78,7 +79,7 @@ public class ClubController {
 		Optional<Club> existingClub = clubRepository.findById(clubId);
 
 		// retrieve the current club from the database, and set its clubAdmin field equal to the clubAdmin object the form created
-		
+
 		if (existingClub.isPresent()) {
 			Club workingClub = existingClub.get();
 			workingClub.setClubAdmin(club.getClubAdmin());

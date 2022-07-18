@@ -1,6 +1,7 @@
 package org.launchcode.codingevents.models;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +18,8 @@ public class ClubAdmin extends AbstractEntity {
 	private String membershipLevel;
 
 	// todo current status 9: if we wanted our admin to know about its related club, how would we do that?
+//	@OneToOne(mappedBy = "clubAdmin")
+//	private Club club;
 
 	public ClubAdmin() {
 	}

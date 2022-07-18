@@ -2,8 +2,9 @@
 
 1. Announcements
     1. Course wrap up stuff:
-        1. Final assignment due today
-        2. Kudos to you
+        1. Final assignment due today, time to work on it in studio
+        2. (No studio)
+        3. Kudos to you
     2. CollabLab
         1. [Link](https://the-collab-lab.codes/)
     3. Other resources and advice
