@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -53,7 +54,6 @@ public class ClubController {
 		clubAndAdmin.setClub(club);
 
 		model.addAttribute("clubAndAdmin", clubAndAdmin);
-
 		model.addAttribute("title", "Create admin for club: " + clubId);
 
 
@@ -61,7 +61,7 @@ public class ClubController {
 	}
 
 	@PostMapping("/{clubId}/admin")
-	public String handleClubAdminFormSubmit(@Validated @ModelAttribute ClubClubAdminDTO clubAndAdminDTO, Errors errors, Model model, @PathVariable Integer clubId) {
+	public String handleClubAdminFormSubmit(@ModelAttribute @Valid ClubClubAdminDTO clubAndAdminDTO, Errors errors, Model model, @PathVariable Integer clubId) {
 
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create admin for club: " + clubId);

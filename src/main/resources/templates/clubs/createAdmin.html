@@ -18,6 +18,7 @@
 		<label>Admin's email
 			<input th:field="${clubAndAdmin.admin.email}" class="form-control">
 		</label>
+		<span th:errors="${clubAndAdmin.admin.email}" class="error"></span>
 		<span th:if="${errors}"
 		      th:text="${errors.getFieldError('admin.email')?.getDefaultMessage()}" class="error"></span>
 	</div>
