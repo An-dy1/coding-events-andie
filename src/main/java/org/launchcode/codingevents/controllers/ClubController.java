@@ -61,7 +61,7 @@ public class ClubController {
 	}
 
 	@PostMapping("/{clubId}/admin")
-	public String handleClubAdminFormSubmit(@ModelAttribute @Valid ClubClubAdminDTO clubAndAdmin, Errors errors, Model model, @PathVariable String clubId) {
+	public String handleClubAdminFormSubmit(@PathVariable Integer clubId, @ModelAttribute @Valid ClubClubAdminDTO clubAndAdmin, Errors errors, Model model) {
 
 		if (errors.hasErrors()) {
 			System.out.println("has errors");
@@ -88,9 +88,39 @@ public class ClubController {
 
 			return "redirect:/clubs/" + clubAndAdmin.getClub().getId();
 		}
-
-
 	}
+
+//	@PostMapping("/{clubId}/admin")
+//	public String handleClubAdminFormSubmit(@ModelAttribute @Valid ClubClubAdminDTO clubAndAdmin, Errors errors, Model model, @PathVariable String clubId) {
+//
+//		if (errors.hasErrors()) {
+//			System.out.println("has errors");
+//			System.out.println(errors.getAllErrors());
+//			model.addAttribute("title", "Create admin for club: " + clubAndAdmin.getClub().getId());
+//
+//			// the model *should* already have any models that were bound (our ClubAdminDTO) and Errors - but that isn't happening
+//			// because of a redirect? Because the clubAdminDTO isn't an entity itself?
+////			model.addAttribute("errors", errors);
+////			model.addAttribute("clubAndAdmin", clubAndAdmin);
+//
+//			String redirectString = "redirect:/clubs/" + clubAndAdmin.getClub().getId() + "/admin";
+//
+//			return redirectString;
+//
+//
+//		} else {
+//			System.out.println("Does not have errors");
+//			Club club = clubAndAdmin.getClub();
+//			ClubAdmin clubAdmin = clubAndAdmin.getAdmin();
+//
+//			club.setClubAdmin(clubAdmin);
+//			clubRepository.save(club);
+//
+//			return "redirect:/clubs/" + clubAndAdmin.getClub().getId();
+//		}
+//
+//
+//	}
 
 	@GetMapping("/{clubId}/admin/delete")
 	public String handleDeleteAdmin(@PathVariable Integer clubId) {
