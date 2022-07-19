@@ -6,6 +6,7 @@
 <header th:replace="fragments :: header"></header>
 
 <table class="table table-striped">
+<<<<<<< HEAD
 	<thead>
 	<tr>
 		<th>Category Name</th>
@@ -16,6 +17,16 @@
 			<a th:text="${category.name}" th:href="'/events?categoryId=' + ${category.id}"></a>
 		</td>
 	</tr>
+=======
+    <thead>
+    <tr>
+        <th>Category Name</th>
+    </tr>
+    </thead>
+    <tr th:each="category : ${categories}">
+        <td><a th:text="${category.name}" th:href="'/events?categoryId=' + ${category.id}"></a></td>
+    </tr>
+>>>>>>> add-tags-andie
 
 </table>
 

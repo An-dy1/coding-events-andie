@@ -14,7 +14,7 @@ public class EventDetails extends AbstractEntity {
 	@NotBlank(message = "Email is required")
 	@Email(message = "Invalid email. Try again.")
 	private String contactEmail;
-	
+
 	public EventDetails(String description, String contactEmail) {
 		this.description = description;
 		this.contactEmail = contactEmail;
@@ -38,5 +38,4 @@ public class EventDetails extends AbstractEntity {
 	public void setContactEmail(String contactEmail) {
 		this.contactEmail = contactEmail;
 	}
-
 }
