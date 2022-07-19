@@ -12,10 +12,8 @@ import javax.validation.constraints.NotNull;
 // but no entity annotation: we aren't persisting this, we're persisting values inside it
 public class ClubClubAdminDTO {
 
-
 	@Valid
 	private Club club;
-
 
 	@Valid
 	private ClubAdmin admin;

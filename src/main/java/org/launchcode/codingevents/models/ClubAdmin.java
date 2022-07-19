@@ -1,18 +1,19 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ClubAdmin extends AbstractEntity {
 
-	@NotNull(message = "name is required")
+	//	@NotNull(message = "name is required")
 	@Size(min = 3, message = "name must be longer")
 	private String name;
 
-	@NotBlank(message = "email cannot be blank")
+	//	@NotBlank(message = "email cannot be blank")
 	@Email(message = "must enter valid email")
 	private String email;
 
@@ -46,11 +47,4 @@ public class ClubAdmin extends AbstractEntity {
 		this.membershipLevel = membershipLevel;
 	}
 
-//	public Club getAssociatedClub() {
-//		return associatedClub;
-//	}
-//
-//	public void setAssociatedClub(Club associatedClub) {
-//		this.associatedClub = associatedClub;
-//	}
 }

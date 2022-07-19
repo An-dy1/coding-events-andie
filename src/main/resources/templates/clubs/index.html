@@ -11,11 +11,11 @@
 <h3>Our admin</h3>
 <div th:if="${club.clubAdmin == null}">
 	<p>This club does not have an admin. Would you like to add one?</p>
-	<a th:href="@{'/clubs/' + ${club.id} + '/admin'}">Add club admin</a>
+	<a th:href="@{'/clubs/admin?clubId=' + ${club.id} }">Add club admin</a>
 </div>
 <div th:unless="${club.clubAdmin == null}">
 	<p th:text="${club.clubAdmin.name}"></p>
-	<a th:href="@{'/clubs/' + ${club.id} + '/admin/delete'}">Delete admin</a>
+	<a th:href="@{'/clubs/admin/delete?clubId=' + ${club.id}}">Delete admin</a>
 </div>
 
 
