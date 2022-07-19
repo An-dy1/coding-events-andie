@@ -5,22 +5,23 @@
 
 <header th:replace="fragments :: header"></header>
 
-<form th:action="@{'/clubs/' + ${clubAndAdmin.club.id} + '/admin'}" method="post">
+<!--<form th:action="@{'/clubs/' + ${clubAndAdmin.club.id} + '/admin'}" method="post">-->
+<form method="post">
 	<div class="form-group">
 		<label>Admin's name
 			<input th:field="${clubAndAdmin.admin.name}" class="form-control">
 		</label>
 		<span th:errors="${clubAndAdmin.admin.name}" class="error"></span>
-		<span th:if="${errors}"
-		      th:text="${errors.getFieldError('admin.name')?.getDefaultMessage()}" class="error"></span>
+		<!--		<span th:if="${errors}"-->
+		<!--		      th:text="${errors.getFieldError('admin.name')?.getDefaultMessage()}" class="error"></span>-->
 	</div>
 	<div class="form-group">
 		<label>Admin's email
 			<input th:field="${clubAndAdmin.admin.email}" class="form-control">
 		</label>
 		<span th:errors="${clubAndAdmin.admin.email}" class="error"></span>
-		<span th:if="${errors}"
-		      th:text="${errors.getFieldError('admin.email')?.getDefaultMessage()}" class="error"></span>
+		<!--		<span th:if="${errors}"-->
+		<!--		      th:text="${errors.getFieldError('admin.email')?.getDefaultMessage()}" class="error"></span>-->
 	</div>
 	<div class="form-group">
 		<label>Membership level
@@ -30,8 +31,6 @@
 			</select>
 		</label>
 		<span th:errors="${clubAndAdmin.admin.membershipLevel}" class="error"></span>
-		<span th:errors="${clubAndAdmin.admin}" class="error"></span>
-		<span th:errors="${clubAndAdmin.club}" class="error"></span>
 	</div>
 	
 	
