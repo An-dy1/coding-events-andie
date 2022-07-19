@@ -26,8 +26,8 @@ public class ClubController {
 	@Autowired
 	ClubAdminRepository clubAdminRepository;
 
-	@GetMapping()
-	public String getClubDetailPage(Model model, @RequestParam Integer clubId) {
+	@GetMapping("/{clubId}")
+	public String getClubDetailPage(Model model, @PathVariable Integer clubId) {
 
 		Optional<Club> result = clubRepository.findById(clubId);
 
@@ -44,8 +44,8 @@ public class ClubController {
 
 	// todo 2: instead of passing in a club object directly to our club admin form, we can set a club on the clubadminDto and then pass that into the form
 	// note: 404 code was written on other branch and this is not doing much validation atm
-	@GetMapping("/admin")
-	public String getAddClubAdminPage(Model model, @RequestParam Integer clubId) {
+	@GetMapping("/{clubId}/admin")
+	public String getAddClubAdminPage(Model model, @PathVariable Integer clubId) {
 
 		Optional<Club> result = clubRepository.findById(clubId);
 		Club club = result.get();
@@ -60,10 +60,9 @@ public class ClubController {
 		return "clubs/createAdmin";
 	}
 
-	@PostMapping("/admin")
-	public String handleClubAdminFormSubmit(@RequestParam Integer clubId, @ModelAttribute @Valid ClubClubAdminDTO clubAndAdmin, Model model, Errors errors) {
+	@PostMapping("/{clubId}/admin")
+	public String handleClubAdminFormSubmit(@ModelAttribute @Valid ClubClubAdminDTO clubAndAdmin, Errors errors, Model model, @PathVariable String clubId) {
 
-		System.out.println("got to the post method");
 		if (errors.hasErrors()) {
 			System.out.println("has errors");
 			System.out.println(errors.getAllErrors());
@@ -74,7 +73,9 @@ public class ClubController {
 //			model.addAttribute("errors", errors);
 //			model.addAttribute("clubAndAdmin", clubAndAdmin);
 
-			return "redirect:/clubs/admin?clubId=" + clubAndAdmin.getClub().getId();
+			String redirectString = "redirect:/clubs/" + clubAndAdmin.getClub().getId() + "/admin";
+
+			return redirectString;
 
 
 		} else {
@@ -85,31 +86,28 @@ public class ClubController {
 			club.setClubAdmin(clubAdmin);
 			clubRepository.save(club);
 
-			return "redirect:/clubs?clubId=" + clubAndAdmin.getClub().getId();
+			return "redirect:/clubs/" + clubAndAdmin.getClub().getId();
 		}
 
 
 	}
 
-	@GetMapping("/admin/delete")
-	public String handleDeleteAdmin(@RequestParam() Integer clubId) {
+	@GetMapping("/{clubId}/admin/delete")
+	public String handleDeleteAdmin(@PathVariable Integer clubId) {
 
 		Optional<Club> result = clubRepository.findById(clubId);
 
 		if (result.isPresent()) {
 			Club club = result.get();
-			if (club.getClubAdmin() != null) {
-				Integer adminId = club.getClubAdmin().getId();
-				club.setClubAdmin(null);
+			Integer adminId = club.getClubAdmin().getId();
+			club.setClubAdmin(null);
 
-				clubAdminRepository.deleteById(adminId);
-				clubRepository.save(club);
-			}
-
+			clubAdminRepository.deleteById(adminId);
+			clubRepository.save(club);
 		}
 
 
-		return "redirect:/clubs?clubId=" + clubId;
+		return "redirect:/clubs/" + clubId;
 	}
 
 }

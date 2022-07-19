@@ -24,15 +24,6 @@
 			<span th:each="tag : ${tags}" th:text="${tag.displayName} + ' '"></span>
 		</td>
 	</tr>
-	<tr>
-		<th>Hosting club</th>
-		<td>
-			<th:block th:if="${event.hostingClub != null}">
-				<a th:text="${event.hostingClub.name}" th:href="@{'/clubs?clubId=' + ${event.hostingClub.id}}"></a>
-			</th:block>
-		
-		</td>
-	</tr>
 </table>
 
 <a th:href="'/events/add-tag?eventId=' + ${event.id}">Add tag to event</a>

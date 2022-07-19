@@ -6,46 +6,32 @@
 <header th:replace="fragments :: header"></header>
 
 <!--<form th:action="@{'/clubs/' + ${clubAndAdmin.club.id} + '/admin'}" method="post">-->
-<form th:action="@{'/clubs/admin?clubId=' + ${clubAndAdmin.club.id}}" method="post">
+<form method="post">
 	<div class="form-group">
-		<th:block th:field="${clubAndAdmin.admin}">
-			<label>Admin's name-->
-				<input th:field="${clubAndAdmin.admin.name}" class="form-control">
-			</label>
-			<label>Admin's email-->
-					<input th:field="${clubAndAdmin.admin.email}" class="form-control">
-				</label>
-			<label>Membership level-->
-							<select th:field="${clubAndAdmin.admin.membershipLevel}" class="form-control">
-								<option value="silver">Silver</option>
-								<option value="gold">Gold</option>
-							</select>
-						</label>
-		</th:block>
-<!--		<label>Admin's name-->
-<!--			<input th:field="${clubAndAdmin.admin.name}" class="form-control">-->
-<!--		</label>-->
-<!--		<span th:errors="${clubAndAdmin.admin.name}" class="error"></span>-->
-<!--		&lt;!&ndash;		<span th:if="${errors}"&ndash;&gt;-->
-<!--		&lt;!&ndash;		      th:text="${errors.getFieldError('admin.name')?.getDefaultMessage()}" class="error"></span>&ndash;&gt;-->
-<!--	</div>-->
-<!--	<div class="form-group">-->
-<!--		<label>Admin's email-->
-<!--			<input th:field="${clubAndAdmin.admin.email}" class="form-control">-->
-<!--		</label>-->
-<!--		<span th:errors="${clubAndAdmin.admin.email}" class="error"></span>-->
-<!--		&lt;!&ndash;		<span th:if="${errors}"&ndash;&gt;-->
-<!--		&lt;!&ndash;		      th:text="${errors.getFieldError('admin.email')?.getDefaultMessage()}" class="error"></span>&ndash;&gt;-->
-<!--	</div>-->
-<!--	<div class="form-group">-->
-<!--		<label>Membership level-->
-<!--			<select th:field="${clubAndAdmin.admin.membershipLevel}" class="form-control">-->
-<!--				<option value="silver">Silver</option>-->
-<!--				<option value="gold">Gold</option>-->
-<!--			</select>-->
-<!--		</label>-->
-<!--		<span th:errors="${clubAndAdmin.admin.membershipLevel}" class="error"></span>-->
-<!--	</div>-->
+		<label>Admin's name
+			<input th:field="${clubAndAdmin.admin.name}" class="form-control">
+		</label>
+		<span th:errors="${clubAndAdmin.admin.name}" class="error"></span>
+		<!--		<span th:if="${errors}"-->
+		<!--		      th:text="${errors.getFieldError('admin.name')?.getDefaultMessage()}" class="error"></span>-->
+	</div>
+	<div class="form-group">
+		<label>Admin's email
+			<input th:field="${clubAndAdmin.admin.email}" class="form-control">
+		</label>
+		<span th:errors="${clubAndAdmin.admin.email}" class="error"></span>
+		<!--		<span th:if="${errors}"-->
+		<!--		      th:text="${errors.getFieldError('admin.email')?.getDefaultMessage()}" class="error"></span>-->
+	</div>
+	<div class="form-group">
+		<label>Membership level
+			<select th:field="${clubAndAdmin.admin.membershipLevel}" class="form-control">
+				<option value="silver">Silver</option>
+				<option value="gold">Gold</option>
+			</select>
+		</label>
+		<span th:errors="${clubAndAdmin.admin.membershipLevel}" class="error"></span>
+	</div>
 	
 	
 	<input type="hidden" th:field="${clubAndAdmin.club}">

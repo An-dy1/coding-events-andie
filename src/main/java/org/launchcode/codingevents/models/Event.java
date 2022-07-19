@@ -89,12 +89,13 @@ public class Event extends AbstractEntity {
 		return tags;
 	}
 
+	public void addTag(Tag aTag) {
+		tags.add(aTag);
+	}
+
 	@Override
 	public String toString() {
 		return name;
 	}
 
-	public void addTag(Tag aTag) {
-		this.tags.add(aTag);
-	}
 }
