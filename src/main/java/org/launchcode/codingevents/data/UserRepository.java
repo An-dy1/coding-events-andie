@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
+	// todo: reminder, why does this not have a return statement?
 	User findByUsername(String username);
 }
