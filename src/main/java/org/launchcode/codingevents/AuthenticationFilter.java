@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class AuthenticationFilter implements HandlerInterceptor {
 
@@ -20,8 +22,14 @@ public class AuthenticationFilter implements HandlerInterceptor {
 	@Autowired
 	UserController userController;
 
+	private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+
+		if (isWhitelisted(request.getRequestURI())) {
+			return true;
+		}
 
 		// from the http request coming in (like GET events), get the current session
 		HttpSession session = request.getSession();
@@ -36,6 +44,15 @@ public class AuthenticationFilter implements HandlerInterceptor {
 
 		// otherwise, redirect and then return false
 		response.sendRedirect("/login");
+		return false;
+	}
+
+	private static boolean isWhitelisted(String path) {
+		for (String pathRoot : whitelist) {
+			if (path.startsWith(pathRoot)) {
+				return true;
+			}
+		}
 		return false;
 	}
 }
