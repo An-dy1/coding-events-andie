@@ -122,7 +122,7 @@ public class UserController {
 		}
 
 		User user = userRepository.findByUsername(loginFormDTO.getUsername());
-		
+
 		if (user == null) {
 			errors.rejectValue("username", "username.doesnotexist", "there is no user with that information");
 			model.addAttribute("title", "Login");
@@ -138,6 +138,12 @@ public class UserController {
 		setUserInSession(request.getSession(), user);
 
 		return "redirect:";
+	}
+
+	@GetMapping("/logout")
+	public String processLogoutRequest(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/login";
 	}
 }
 
