@@ -10,32 +10,33 @@
 <form method="post">
 	<div class="form-group">
 		<label>Admin's name
-			<input th:field="${clubAndAdmin.admin.name}" class="form-control">
+			<input th:field="${clubClubAdminDTO.admin.name}" class="form-control">
 		</label>
-		<span th:errors="${clubAndAdmin.admin.name}" class="error"></span>
+		<!-- Note: experiment with getting errors from the field specifically vs email, just on the admin object itself -->
+		<span th:errors="${clubClubAdminDTO.admin.name}" class="error"></span>
 		<!--		<span th:if="${errors}"-->
 		<!--		      th:text="${errors.getFieldError('admin.name')?.getDefaultMessage()}" class="error"></span>-->
 	</div>
 	<div class="form-group">
 		<label>Admin's email
-			<input th:field="${clubAndAdmin.admin.email}" class="form-control">
+			<input th:field="${clubClubAdminDTO.admin.email}" class="form-control">
 		</label>
-		<span th:errors="${clubAndAdmin.admin.email}" class="error"></span>
+		<span th:errors="${clubClubAdminDTO.admin}" class="error"></span>
 		<!--		<span th:if="${errors}"-->
 		<!--		      th:text="${errors.getFieldError('admin.email')?.getDefaultMessage()}" class="error"></span>-->
 	</div>
 	<div class="form-group">
 		<label>Membership level
-			<select th:field="${clubAndAdmin.admin.membershipLevel}" class="form-control">
+			<select th:field="${clubClubAdminDTO.admin.membershipLevel}" class="form-control">
 				<option value="silver">Silver</option>
 				<option value="gold">Gold</option>
 			</select>
 		</label>
-		<span th:errors="${clubAndAdmin.admin.membershipLevel}" class="error"></span>
+		<span th:errors="${clubClubAdminDTO.admin}" class="error"></span>
 	</div>
 	
 	
-	<input type="hidden" th:field="${clubAndAdmin.club}">
+	<input type="hidden" th:field="${clubClubAdminDTO.club}">
 	
 	<input type="submit" value="Create" class="btn btn-primary">
 </form>

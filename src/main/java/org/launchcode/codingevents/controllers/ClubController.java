@@ -50,10 +50,10 @@ public class ClubController {
 		Optional<Club> result = clubRepository.findById(clubId);
 		Club club = result.get();
 
-		ClubClubAdminDTO clubAndAdmin = new ClubClubAdminDTO();
-		clubAndAdmin.setClub(club);
+		ClubClubAdminDTO clubClubAdminDTO = new ClubClubAdminDTO();
+		clubClubAdminDTO.setClub(club);
 
-		model.addAttribute("clubAndAdmin", clubAndAdmin);
+		model.addAttribute("clubClubAdminDTO", clubClubAdminDTO);
 		model.addAttribute("title", "Create admin for club: " + clubId);
 
 
@@ -71,7 +71,6 @@ public class ClubController {
 			// the model *should* already have any models that were bound (our ClubAdminDTO) and Errors - but that isn't happening
 			// because of a redirect? Because the clubAdminDTO isn't an entity itself?
 //			model.addAttribute("errors", errors);
-//			model.addAttribute("clubAndAdmin", clubAndAdmin);
 
 			String redirectString = "redirect:/clubs/" + clubAndAdmin.getClub().getId() + "/admin";
 
