@@ -24,6 +24,7 @@ public class Club extends AbstractEntity {
 	private final List<Event> events = new ArrayList<>();
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@Valid
 	private ClubAdmin clubAdmin;
 
 	public Club(String name, String location, String description) {

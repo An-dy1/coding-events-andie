@@ -96,6 +96,7 @@ public class EventController {
 	                                     Errors errors, Model model) {
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create Event");
+			System.out.println(errors.getAllErrors());
 			return "events/create";
 		}
 
@@ -161,7 +162,7 @@ public class EventController {
 	}
 
 	@PostMapping("add-tag")
-	public String handleAddTagForm(@ModelAttribute @Valid EventTagDTO eventTag, Model model, Errors errors) {
+	public String handleAddTagForm(@ModelAttribute @Valid EventTagDTO eventTag, Errors errors, Model model) {
 
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Sorry, could not add tag, please try again");

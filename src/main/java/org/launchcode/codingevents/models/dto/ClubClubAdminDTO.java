@@ -4,6 +4,7 @@ import org.launchcode.codingevents.models.Club;
 import org.launchcode.codingevents.models.ClubAdmin;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 // todo 1: data transfer object
