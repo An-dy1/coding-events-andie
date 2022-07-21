@@ -19,7 +19,7 @@ public class LoginFormDTO {
 	private String password;
 
 	// todo: doesn't need a constructor?
-	
+
 	public String getUsername() {
 		return username;
 	}

@@ -25,7 +25,7 @@ public class UserController {
 
 	private static final String userSessionKey = "user";
 
-	// todo: why public method when we've been writing private?
+	// todo: why public method when we've been writing private? used in Authentication Filter
 	public User getUserFromSession(HttpSession session) {
 
 		// using a passed in HttpSession object, we will get the "user" attribute from it

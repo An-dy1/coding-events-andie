@@ -8,6 +8,7 @@ public class RegistrationFormDTO extends LoginFormDTO {
 		return verifyPassword;
 	}
 
+	// todo note: no validation on whether this matches the LoginForm password field or not
 	public void setVerifyPassword(String verifyPassword) {
 		this.verifyPassword = verifyPassword;
 	}
