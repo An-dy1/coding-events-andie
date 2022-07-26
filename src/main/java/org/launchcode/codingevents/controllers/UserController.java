@@ -59,6 +59,7 @@ public class UserController {
 		model.addAttribute("registrationFormDTO", new RegistrationFormDTO());
 		model.addAttribute("title", "Register");
 		return "users/register";
+
 	}
 
 	@PostMapping("/register")
