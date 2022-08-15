@@ -12,24 +12,16 @@ public class User extends AbstractEntity {
 	private String username;
 
 	@NotNull
-	private String pwHash;
+	private String passwordHash;
 
 	private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	public User(String username, String password) {
 		this.username = username;
-		this.pwHash = encoder.encode(password);
-	}
-
-	public User() {
-
-	}
-
-	public String getUsername() {
-		return username;
+		this.passwordHash = encoder.encode(password);
 	}
 
 	public boolean isMatchingPassword(String password) {
-		return encoder.matches(password, pwHash);
+		return encoder.matches(password, passwordHash);
 	}
 }
