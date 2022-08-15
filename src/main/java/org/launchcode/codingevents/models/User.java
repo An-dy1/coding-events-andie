@@ -22,6 +22,6 @@ public class User extends AbstractEntity {
 	}
 
 	public boolean isMatchingPassword(String password) {
-		return encoder.matches(password, passwordHashField);
+		return !encoder.matches(password, passwordHashField);
 	}
 }
